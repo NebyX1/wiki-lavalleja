@@ -1,0 +1,496 @@
+{
+  "articles": [
+    {
+      "id": "juan-antonio-lavalleja",
+      "slug": "juan-antonio-lavalleja",
+      "title": "Juan Antonio Lavalleja",
+      "subtitle": "El minuano que encabezó la Cruzada Libertadora",
+      "type": "Personaje histórico",
+      "streetName": "Calle / Avenida Gral. Juan Antonio Lavalleja",
+      "period": "1784-1853",
+      "birthPlace": "Minas, actual departamento de Lavalleja",
+      "deathPlace": "Montevideo, Uruguay",
+      "category": "Independencia",
+      "tags": ["Minas", "Lavalleja", "Treinta y Tres Orientales", "Independencia", "Plaza Libertad", "Cruzada Libertadora"],
+      "summary": "Militar y político uruguayo nacido en Minas. Fue jefe de los Treinta y Tres Orientales, figura central de la Cruzada Libertadora de 1825 y presidente de Uruguay en el Triunvirato de Gobierno de 1853.",
+      "heroImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Monumento%20a%20Lavalleja-Plaza%20Libertad.JPG",
+      "imageAlt": "Monumento a Juan Antonio Lavalleja en Plaza Libertad de Minas",
+      "imageCredit": "Wikimedia Commons, Monumento a Lavalleja-Plaza Libertad.JPG",
+      "coordinates": {
+        "lat": -34.375,
+        "lng": -55.238,
+        "confidence": "media",
+        "note": "Coordenadas aproximadas del área central de Minas y Plaza Libertad, no de un padrón específico."
+      },
+      "streetEvidence": {
+        "status": "confirmada",
+        "note": "El mapa de saneamiento de OSE para Minas incluye referencias a Juan A. Lavalleja y Brig. Gral. J. A. Lavalleja. La ciudad también conserva su memoria en Plaza Libertad."
+      },
+      "historicalContext": "Juan Antonio Lavalleja pertenece al núcleo de figuras orientales asociadas a las guerras de independencia, al artiguismo tardío, a la resistencia frente a la dominación luso-brasileña y a la formación del Estado uruguayo.",
+      "keyFacts": [
+        "Nació en Minas el 24 de junio de 1784.",
+        "Fue jefe de los Treinta y Tres Orientales.",
+        "Participó en la Cruzada Libertadora iniciada en 1825.",
+        "Fue presidente de Uruguay en el Triunvirato de Gobierno de 1853.",
+        "En Plaza Libertad de Minas se instaló en 1902 un monumento ecuestre dedicado a su figura."
+      ],
+      "timeline": [
+        {
+          "year": "1784",
+          "event": "Nace en Minas, en el territorio entonces vinculado al Virreinato del Río de la Plata."
+        },
+        {
+          "year": "1811",
+          "event": "Se incorpora al ciclo revolucionario oriental y participa en la lucha iniciada contra el poder colonial."
+        },
+        {
+          "year": "1825",
+          "event": "Encabeza la Cruzada Libertadora y el desembarco de los Treinta y Tres Orientales."
+        },
+        {
+          "year": "1853",
+          "event": "Integra el Triunvirato de Gobierno de Uruguay y fallece ese mismo año."
+        },
+        {
+          "year": "1902",
+          "event": "Se instala en Plaza Libertad de Minas el monumento ecuestre a Lavalleja."
+        }
+      ],
+      "relatedPlaces": [
+        {
+          "name": "Plaza Libertad",
+          "description": "Plaza principal de Minas y lugar del monumento ecuestre a Juan Antonio Lavalleja.",
+          "type": "Espacio público"
+        },
+        {
+          "name": "Casa de la Cultura de Minas",
+          "description": "Espacio cultural donde funcionan salas y museos vinculados a la historia local.",
+          "type": "Institución cultural"
+        },
+        {
+          "name": "Departamento de Lavalleja",
+          "description": "El antiguo departamento de Minas tomó el nombre Lavalleja por ley de 1927.",
+          "type": "Territorio"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Juan Antonio Lavalleja - Wikipedia",
+          "url": "https://es.wikipedia.org/wiki/Juan_Antonio_Lavalleja",
+          "kind": "referencia"
+        },
+        {
+          "label": "Plaza Libertad - Portal oficial de Turismo de Lavalleja",
+          "url": "https://lavalleja.uy/bienestar-y-espiritualidad/plaza-libertad/",
+          "kind": "oficial"
+        },
+        {
+          "label": "Bicentenario en Minas - Ministerio de Educación y Cultura",
+          "url": "https://www.gub.uy/ministerio-educacion-cultura/comunicacion/noticias/bicentenario-minas-actividades-culturales-historicas-homenaje-lavalleja-ana-0",
+          "kind": "oficial"
+        },
+        {
+          "label": "Mapa de saneamiento de Minas - OSE",
+          "url": "https://www.ose.com.uy/descargas/saneamiento/mapas_locs/lavalleja___minas.pdf",
+          "kind": "mapa"
+        },
+        {
+          "label": "Imagen del monumento a Lavalleja - Wikimedia Commons",
+          "url": "https://commons.wikimedia.org/wiki/File:Monumento_a_Lavalleja-Plaza_Libertad.JPG",
+          "kind": "imagen"
+        }
+      ],
+      "sourceNotes": "Para una versión institucional definitiva, contrastar fechas y detalles con bibliografía local, archivos de la Intendencia de Lavalleja, Museo Histórico Nacional y el libro Callejero Minuano.",
+      "body": "## Síntesis\n\nJuan Antonio Lavalleja y de la Torre nació en Minas el 24 de junio de 1784 y falleció en Montevideo el 22 de octubre de 1853. Fue militar, político, jefe de los Treinta y Tres Orientales y una de las figuras centrales de la independencia oriental.\n\n## Vínculo con Minas\n\nMinas conserva la memoria de Lavalleja en el espacio público, en el nomenclátor y en la propia identidad departamental. Plaza Libertad alberga el monumento ecuestre a su figura, instalado en 1902 y considerado el primer monumento ecuestre del país.\n\n## La Cruzada Libertadora\n\nLa Cruzada Libertadora de 1825 es el episodio más asociado a su nombre. Desde ese acontecimiento, Lavalleja quedó incorporado al panteón histórico nacional como jefe de los Treinta y Tres Orientales.\n\n## Para recorrer la ciudad\n\nEste artículo permite conectar biografía, callejero, plaza, monumento y memoria departamental. WikiLavalleja debe tratarlo como uno de sus nodos centrales: desde aquí pueden enlazarse artículos sobre Ana Monterroso, Plaza Libertad, el departamento de Lavalleja, el Teatro Lavalleja y la memoria independentista en Minas."
+    },
+    {
+      "id": "manuel-lavalleja",
+      "slug": "manuel-lavalleja",
+      "title": "Manuel Lavalleja",
+      "subtitle": "El otro Lavalleja de la Cruzada Libertadora",
+      "type": "Personaje histórico",
+      "streetName": "Coronel Manuel Lavalleja",
+      "period": "1797-1852",
+      "birthPlace": "Minas, actual departamento de Lavalleja",
+      "deathPlace": "Salto, Uruguay",
+      "category": "Independencia",
+      "tags": ["Minas", "Lavalleja", "Treinta y Tres Orientales", "Artiguismo", "Independencia", "Familia Lavalleja"],
+      "summary": "Militar uruguayo nacido en Minas, hermano de Juan Antonio Lavalleja, oficial vinculado al ciclo artiguista y uno de los Treinta y Tres Orientales.",
+      "heroImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Escuela%20N%C2%B0%20104%20Ana%20Monterroso%20de%20Lavalleja.jpg",
+      "imageAlt": "Escuela 104 Ana Monterroso de Lavalleja en Minas",
+      "imageCredit": "Wikimedia Commons, Escuela N° 104 Ana Monterroso de Lavalleja.jpg",
+      "coordinates": {
+        "lat": -34.380244,
+        "lng": -55.25171,
+        "confidence": "media",
+        "note": "Coordenadas aproximadas asociadas al entorno urbano de Manuel Lavalleja S/N y referencias cartográficas públicas."
+      },
+      "streetEvidence": {
+        "status": "confirmada",
+        "note": "ANEP registra la Escuela Nº 104 Ana Monterroso de Lavalleja con dirección MANUEL LAVALLEJA S/N en Minas."
+      },
+      "historicalContext": "Manuel Lavalleja permite ampliar la mirada sobre la familia Lavalleja y sobre los actores menos conocidos de la independencia oriental.",
+      "keyFacts": [
+        "Nació en Minas el 20 de septiembre de 1797.",
+        "Su nombre completo fue Juan Joaquín Manuel Eustaquio Lavalleja y de la Torre.",
+        "Fue militar y oficial del general José Gervasio Artigas.",
+        "Fue uno de los Treinta y Tres Orientales.",
+        "Fue hermano de Juan Antonio Lavalleja."
+      ],
+      "timeline": [
+        {
+          "year": "1797",
+          "event": "Nace en Minas."
+        },
+        {
+          "year": "1810s",
+          "event": "Se vincula al ciclo de luchas orientales y artiguistas."
+        },
+        {
+          "year": "1825",
+          "event": "Integra el grupo de los Treinta y Tres Orientales."
+        },
+        {
+          "year": "1852",
+          "event": "Fallece en el departamento de Salto."
+        }
+      ],
+      "relatedPlaces": [
+        {
+          "name": "Coronel Manuel Lavalleja",
+          "description": "Calle de Minas donde ANEP registra la dirección de la Escuela Nº 104.",
+          "type": "Calle"
+        },
+        {
+          "name": "Escuela Nº 104 Ana Monterroso de Lavalleja",
+          "description": "Institución educativa ubicada en Manuel Lavalleja S/N, según registro de ANEP.",
+          "type": "Institución educativa"
+        },
+        {
+          "name": "Plaza Libertad",
+          "description": "Espacio principal de la memoria lavallejista en Minas.",
+          "type": "Espacio público"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Manuel Lavalleja - Wikipedia",
+          "url": "https://es.wikipedia.org/wiki/Manuel_Lavalleja",
+          "kind": "referencia"
+        },
+        {
+          "label": "Escuela Nº 104 Ana Monterroso de Lavalleja - ANEP",
+          "url": "https://www.anep.edu.uy/monitor/servlet/fichaescuela?1109104=",
+          "kind": "oficial"
+        },
+        {
+          "label": "Imagen Escuela N° 104 - Wikimedia Commons",
+          "url": "https://commons.wikimedia.org/wiki/File:Escuela_N%C2%B0_104_Ana_Monterroso_de_Lavalleja.jpg",
+          "kind": "imagen"
+        }
+      ],
+      "sourceNotes": "La información disponible en línea sobre Manuel Lavalleja es menos abundante que la de Juan Antonio. Para una versión definitiva, revisar bibliografía local y fuentes históricas sobre los Treinta y Tres Orientales.",
+      "body": "## Síntesis\n\nJuan Joaquín Manuel Eustaquio Lavalleja y de la Torre nació en Minas en 1797 y falleció en Salto en 1852. Fue militar uruguayo, oficial vinculado al ciclo artiguista y uno de los Treinta y Tres Orientales.\n\n## Un Lavalleja menos visible\n\nLa memoria histórica suele concentrarse en Juan Antonio Lavalleja, pero Manuel permite mostrar que los procesos históricos fueron colectivos, familiares y territoriales. Su figura funciona como una entrada para recuperar protagonistas menos conocidos de la independencia oriental.\n\n## Vínculo urbano\n\nEn Minas, el nombre Manuel Lavalleja aparece en el entramado urbano. ANEP registra la Escuela Nº 104 Ana Monterroso de Lavalleja con dirección Manuel Lavalleja S/N, lo que permite conectar el artículo con un punto local concreto.\n\n## Importancia para WikiLavalleja\n\nEste artículo ayuda a construir una wiki que no se limite a los nombres monumentales. Manuel Lavalleja es útil para mostrar redes familiares, calles, escuelas y memorias barriales."
+    },
+    {
+      "id": "rafael-perez-del-puerto",
+      "slug": "rafael-perez-del-puerto",
+      "title": "Rafael Pérez del Puerto",
+      "subtitle": "El organizador territorial detrás de la fundación de Minas",
+      "type": "Fundador / organizador territorial",
+      "streetName": "Rafael Pérez del Puerto",
+      "period": "Siglo XVIII y comienzos del XIX",
+      "birthPlace": "Aspe, Alicante, España",
+      "deathPlace": "A verificar",
+      "category": "Fundación de Minas",
+      "tags": ["Minas", "Fundación", "Villa de la Concepción de las Minas", "Real Hacienda", "Maldonado", "Rocha", "Urbanismo histórico"],
+      "summary": "Funcionario colonial originario de Aspe, vinculado a la organización territorial del este de la Banda Oriental. Fue señalado como brazo ejecutor en la fundación de la villa de Minas y de Rocha.",
+      "heroImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Minas%20Uruguay.jpg",
+      "imageAlt": "Vista urbana de Minas, Uruguay",
+      "imageCredit": "Wikimedia Commons, Minas Uruguay.jpg",
+      "coordinates": {
+        "lat": -34.375357,
+        "lng": -55.242688,
+        "confidence": "baja",
+        "note": "Coordenadas aproximadas de Minas. No se encontró una coordenada institucional específica de la calle Rafael Pérez del Puerto."
+      },
+      "streetEvidence": {
+        "status": "probable",
+        "note": "Se encontró evidencia cartográfica de una calle Rafael Pérez del Puerto en Minas, pero conviene validarla con nomenclátor oficial o catastro departamental."
+      },
+      "historicalContext": "La fundación de Minas debe entenderse dentro del poblamiento colonial tardío, la administración de la Real Hacienda y la organización territorial de familias trasladadas hacia la zona este de la Banda Oriental.",
+      "keyFacts": [
+        "Fue originario de Aspe, Alicante.",
+        "Cumplió funciones coloniales en Maldonado durante décadas.",
+        "Llegó a ser ministro de la Real Hacienda.",
+        "Fue señalado como brazo ejecutor en la fundación de Minas y Rocha.",
+        "También se lo vincula a la reorganización de San Carlos y Maldonado."
+      ],
+      "timeline": [
+        {
+          "year": "1770s",
+          "event": "Se integra a funciones administrativas coloniales vinculadas a la Corona española."
+        },
+        {
+          "year": "1783",
+          "event": "Interviene en el proceso fundacional de la Villa de la Concepción de las Minas."
+        },
+        {
+          "year": "Siglo XVIII",
+          "event": "Participa en procesos de organización administrativa y territorial del este de la Banda Oriental."
+        },
+        {
+          "year": "2025",
+          "event": "Una publicación en formato cómic sobre su figura fue presentada y difundida desde Maldonado, buscando recuperar su memoria histórica."
+        }
+      ],
+      "relatedPlaces": [
+        {
+          "name": "Villa de la Concepción de las Minas",
+          "description": "Nombre histórico asociado al origen de la ciudad de Minas.",
+          "type": "Poblado histórico"
+        },
+        {
+          "name": "Maldonado",
+          "description": "Zona donde Pérez del Puerto cumplió funciones administrativas coloniales.",
+          "type": "Ciudad / territorio"
+        },
+        {
+          "name": "Rocha",
+          "description": "Otra ciudad cuya fundación aparece vinculada a la acción de Pérez del Puerto.",
+          "type": "Ciudad"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Publicación homenaje a Rafael Pérez del Puerto - Intendencia de Maldonado",
+          "url": "https://maldonado.gub.uy/noticias/publicacion-homenaje-rafael-perez-del-puerto-fue-presentada-maldonado",
+          "kind": "oficial"
+        },
+        {
+          "label": "Rafael Pérez del Puerto, biografía de un hombre ejemplar - Revista Histórica Rochense",
+          "url": "https://www.revistahistoricarochense.com.uy/rhr-no-3/rafael-perez-del-puerto-biografia-de-un-hombre-ejemplar/",
+          "kind": "referencia"
+        },
+        {
+          "label": "Calle Rafael Pérez del Puerto en Minas - Waze",
+          "url": "https://www.waze.com/live-map/directions/uy/departamento-de-lavalleja/minas/rafael-perez-del-puerto",
+          "kind": "mapa"
+        },
+        {
+          "label": "Imagen urbana de Minas - Wikimedia Commons",
+          "url": "https://commons.wikimedia.org/wiki/File:Minas_Uruguay.jpg",
+          "kind": "imagen"
+        }
+      ],
+      "sourceNotes": "La existencia de la calle debe validarse con nomenclátor oficial departamental. La información histórica se basa principalmente en fuentes de Maldonado y Rocha, por lo que conviene complementarla con archivo local de Lavalleja.",
+      "body": "## Síntesis\n\nRafael Pérez del Puerto fue un funcionario colonial originario de Aspe, Alicante. Su figura está vinculada a la organización administrativa y territorial del este de la Banda Oriental durante el siglo XVIII.\n\n## Fundación de Minas\n\nLa Intendencia de Maldonado lo describe como el brazo ejecutor en la fundación de la villa de Minas y de Rocha. Esto lo vuelve una figura clave para entender el origen urbano de Minas, no solamente como lugar de memoria militar posterior, sino como proyecto de poblamiento, trazado y administración.\n\n## Un personaje para explicar la ciudad\n\nEn WikiLavalleja, Pérez del Puerto sirve para contar cómo una ciudad nace antes de convertirse en símbolo. Su artículo debe conectar la Villa de la Concepción de las Minas con el callejero actual, el plano urbano, la Real Hacienda y los procesos coloniales de poblamiento.\n\n## Pendientes de investigación\n\nPara una versión definitiva del artículo, se debe revisar el nomenclátor oficial de Minas, documentos de archivo departamental y bibliografía local sobre la fundación de la ciudad."
+    },
+    {
+      "id": "juan-jose-morosoli",
+      "slug": "juan-jose-morosoli",
+      "title": "Juan José Morosoli",
+      "subtitle": "El narrador minuano que hizo literatura con las voces del pueblo",
+      "type": "Escritor",
+      "streetName": "Juan José Morosoli",
+      "period": "1899-1957",
+      "birthPlace": "Minas, Lavalleja",
+      "deathPlace": "Minas, Lavalleja",
+      "category": "Literatura",
+      "tags": ["Minas", "Lavalleja", "Literatura uruguaya", "Narrativa", "Cultura", "Mundo rural", "Premios Morosoli"],
+      "summary": "Escritor uruguayo nacido en Minas, referente de la narrativa nacional. Su obra recogió personajes, voces y atmósferas del mundo rural y de la vida de pueblo.",
+      "heroImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Juan%20Jose%20Morosoli.jpg",
+      "imageAlt": "Retrato de Juan José Morosoli",
+      "imageCredit": "Wikimedia Commons, Juan Jose Morosoli.jpg",
+      "coordinates": {
+        "lat": -34.371095,
+        "lng": -55.246267,
+        "confidence": "media",
+        "note": "Coordenadas de la Escuela Nº 7 Juan José Morosoli según Wikimedia Commons y referencias públicas; no necesariamente de la calle."
+      },
+      "streetEvidence": {
+        "status": "confirmada",
+        "note": "El mapa de OSE para Minas incluye J.J. Morosoli. ANEP registra además la Escuela Nº 7 Juan José Morosoli en Minas."
+      },
+      "historicalContext": "Morosoli representa una memoria cultural diferente a la épica militar: una historia de pueblo, oficios, campo, pequeñas vidas y habla popular.",
+      "keyFacts": [
+        "Nació en Minas el 19 de enero de 1899.",
+        "Fue uno de los grandes narradores uruguayos del siglo XX.",
+        "Abandonó la escuela a los 9 años para trabajar con su padre.",
+        "Trabajó en una librería familiar, donde fortaleció su contacto con la literatura.",
+        "Su barraca en Sarandí y 18 de Julio le permitió conocer personajes rurales que alimentaron su narrativa."
+      ],
+      "timeline": [
+        {
+          "year": "1899",
+          "event": "Nace en Minas."
+        },
+        {
+          "year": "Infancia",
+          "event": "Abandona la escuela tempranamente y trabaja junto a su padre."
+        },
+        {
+          "year": "Juventud",
+          "event": "Trabaja en una librería familiar y comienza su contacto más sostenido con la literatura."
+        },
+        {
+          "year": "Madurez",
+          "event": "Desarrolla una obra narrativa fuertemente marcada por personajes rurales y del pueblo chico."
+        },
+        {
+          "year": "1957",
+          "event": "Fallece en Minas."
+        }
+      ],
+      "relatedPlaces": [
+        {
+          "name": "Escuela Nº 7 Juan José Morosoli",
+          "description": "Escuela pública de Minas que lleva su nombre.",
+          "type": "Institución educativa"
+        },
+        {
+          "name": "Sala Juan José Morosoli y Santiago Dossetti",
+          "description": "Sala cultural de Minas vinculada a la memoria artística y literaria del departamento.",
+          "type": "Institución cultural"
+        },
+        {
+          "name": "Sarandí y 18 de Julio",
+          "description": "Zona donde se menciona la barraca de Morosoli, espacio de contacto con personajes rurales.",
+          "type": "Referencia urbana"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Juan José Morosoli - MEC",
+          "url": "https://www.mna.gub.uy/innovaportal/v/123112/60/mecweb/juan-jose-morosoli?parentid=111652",
+          "kind": "oficial"
+        },
+        {
+          "label": "Escuela Nº 7 Juan José Morosoli - ANEP",
+          "url": "https://www.anep.edu.uy/monitor/servlet/fichaescuela?1109007=",
+          "kind": "oficial"
+        },
+        {
+          "label": "Escuela N° 7 Juan José Morosoli - Wikimedia Commons",
+          "url": "https://commons.wikimedia.org/wiki/File:Escuela_N%C2%B0_7_Juan_Jos%C3%A9_Morosoli.jpg",
+          "kind": "imagen"
+        },
+        {
+          "label": "Mapa de saneamiento de Minas - OSE",
+          "url": "https://www.ose.com.uy/descargas/saneamiento/mapas_locs/lavalleja___minas.pdf",
+          "kind": "mapa"
+        },
+        {
+          "label": "Retrato de Juan José Morosoli - Wikimedia Commons",
+          "url": "https://commons.wikimedia.org/wiki/File:Juan_Jose_Morosoli.jpg",
+          "kind": "imagen"
+        }
+      ],
+      "sourceNotes": "Para una versión más rica, sumar fragmentos de bibliografía local, referencias a sus obras principales y materiales de la Fundación Lolita Rubial o Casa de la Cultura.",
+      "body": "## Síntesis\n\nJuan José Morosoli nació en Minas en 1899 y falleció en la misma ciudad en 1957. Es uno de los escritores uruguayos más importantes del siglo XX y una figura esencial para la memoria cultural minuana.\n\n## Literatura de pueblo y campo\n\nMorosoli construyó una narrativa profundamente vinculada a las voces rurales, los oficios, la vida de pueblo y los personajes sencillos. Su obra permite ver una Minas menos monumental, más íntima y humana.\n\n## Trabajo, calle y literatura\n\nEl MEC recuerda que Morosoli abandonó la escuela a los 9 años para trabajar junto a su padre. Luego ingresó a una librería familiar y más adelante tuvo una barraca en Sarandí y 18 de Julio. Ese contacto cotidiano con trabajadores, vecinos y personas del mundo rural fue materia viva para sus relatos.\n\n## Memoria local\n\nSu nombre aparece en instituciones educativas, espacios culturales y en el callejero. Para WikiLavalleja, Morosoli debe ser uno de los artículos centrales de la categoría Literatura, conectando ciudad, escuela, barrio, escritura y memoria popular."
+    },
+    {
+      "id": "olegaria-machado-amor",
+      "slug": "olegaria-machado-amor",
+      "title": "Olegaria Machado Amor",
+      "subtitle": "Maestra, traductora y poeta minuana recuperada del olvido",
+      "type": "Poetisa, maestra, traductora y escritora",
+      "streetName": "Olegaria Machado Amor / Machado Amor",
+      "period": "1854-1920",
+      "birthPlace": "Minas, Lavalleja",
+      "deathPlace": "Minas, Lavalleja",
+      "category": "Literatura y educación",
+      "tags": ["Minas", "Lavalleja", "Poesía", "Educación", "Mujeres de Lavalleja", "Memoria femenina", "Literatura"],
+      "summary": "Petrona Plácida Olegaria Machado Amor fue una maestra, traductora, pintora y escritora nacida en Minas. Su figura permite recuperar memorias femeninas, literarias y educativas de Lavalleja.",
+      "heroImage": "https://commons.wikimedia.org/wiki/Special:FilePath/Plaza%20Rivera%2C%20Minas.jpg",
+      "imageAlt": "Plaza Rivera en Minas, Uruguay",
+      "imageCredit": "Wikimedia Commons, Plaza Rivera, Minas.jpg",
+      "coordinates": {
+        "lat": -34.36,
+        "lng": -55.25,
+        "confidence": "baja",
+        "note": "Coordenadas aproximadas de Minas. Falta ubicar con precisión la calle Olegaria Machado Amor."
+      },
+      "streetEvidence": {
+        "status": "confirmada",
+        "note": "El mapa de saneamiento de OSE para Minas incluye Machado Amor. Otras referencias cartográficas ubican Olegaria Machado Amor en el norte de Minas."
+      },
+      "historicalContext": "Olegaria Machado Amor permite rescatar una memoria cultural femenina en una historia urbana frecuentemente dominada por figuras masculinas, militares y políticas.",
+      "keyFacts": [
+        "Su nombre completo fue Petrona Plácida Olegaria Machado Amor.",
+        "Nació en Minas el 31 de mayo de 1854.",
+        "Falleció en Minas el 18 de febrero de 1920.",
+        "Fue maestra, traductora, pintora y escritora.",
+        "Su obra fue recuperada en la colección Mujeres Poetas de Lavalleja."
+      ],
+      "timeline": [
+        {
+          "year": "1854",
+          "event": "Nace en Minas."
+        },
+        {
+          "year": "Siglo XIX",
+          "event": "Desarrolla actividad educativa, literaria y cultural."
+        },
+        {
+          "year": "1899",
+          "event": "Se registra el poema A mi patria: 25 de Agosto dentro de la recuperación de su obra."
+        },
+        {
+          "year": "1920",
+          "event": "Fallece en Minas."
+        },
+        {
+          "year": "2020s",
+          "event": "Su figura es recuperada por iniciativas culturales y literarias sobre mujeres poetas de Lavalleja."
+        }
+      ],
+      "relatedPlaces": [
+        {
+          "name": "Olegaria Machado Amor / Machado Amor",
+          "description": "Calle de Minas que permite vincular su memoria con el nomenclátor urbano.",
+          "type": "Calle"
+        },
+        {
+          "name": "Minas",
+          "description": "Ciudad donde nació, vivió y falleció.",
+          "type": "Ciudad"
+        },
+        {
+          "name": "Teatro Lavalleja",
+          "description": "Espacio donde han circulado obras e iniciativas culturales vinculadas a la memoria local.",
+          "type": "Institución cultural"
+        }
+      ],
+      "sources": [
+        {
+          "label": "Mujeres Poetas de Lavalleja - Primera Página",
+          "url": "https://primerapagina.com.uy/cultura/pablo-baubeta-publico-coleccion-mujeres-poetas-de-lavalleja/",
+          "kind": "institucional"
+        },
+        {
+          "label": "Tercera obra del ciclo Ellas en la Delmira viaja - Intendencia de Montevideo",
+          "url": "https://montevideo.gub.uy/noticias/cultura/tercera-obra-del-ciclo-ellas-en-la-delmira-viaja",
+          "kind": "oficial"
+        },
+        {
+          "label": "Olegaria Machado Amor - Catálogo Parlamento",
+          "url": "https://pmb.parlamento.gub.uy/pmb/opac_css/index.php?id=122322&lvl=notice_display",
+          "kind": "biblioteca"
+        },
+        {
+          "label": "Mapa de saneamiento de Minas - OSE",
+          "url": "https://www.ose.com.uy/descargas/saneamiento/mapas_locs/lavalleja___minas.pdf",
+          "kind": "mapa"
+        },
+        {
+          "label": "Imagen Plaza Rivera, Minas - Wikimedia Commons",
+          "url": "https://commons.wikimedia.org/wiki/File:Plaza_Rivera,_Minas.jpg",
+          "kind": "imagen"
+        }
+      ],
+      "sourceNotes": "No se encontró una imagen abierta y estable de Olegaria Machado Amor. Para la demo se usa una imagen urbana de Minas. En una etapa posterior conviene buscar archivo fotográfico local o autorización familiar/institucional.",
+      "body": "## Síntesis\n\nPetrona Plácida Olegaria Machado Amor nació en Minas el 31 de mayo de 1854 y falleció en la misma ciudad el 18 de febrero de 1920. Fue maestra, traductora, pintora y escritora.\n\n## Una memoria recuperada\n\nSu figura permite iluminar una zona menos visible de la historia local: la de las mujeres que escribieron, enseñaron, tradujeron y sostuvieron cultura en contextos donde la vida pública estaba fuertemente marcada por lo masculino.\n\n## Literatura y educación\n\nLa colección Mujeres Poetas de Lavalleja recupera su biografía, poemas y huellas documentales. Esta recuperación es clave para que WikiLavalleja no reproduzca una memoria formada solamente por próceres militares o autoridades políticas.\n\n## Vínculo con el callejero\n\nEl mapa de OSE para Minas incluye Machado Amor, y otras referencias cartográficas ubican Olegaria Machado Amor en el norte de la ciudad. Este artículo debe conectar poesía, educación, memoria femenina y espacio urbano.\n\n## Pendientes\n\nPara una versión definitiva se recomienda buscar fotografías, poemas completos con derechos claros, documentos escolares y referencias en archivos locales."
+    }
+  ]
+}
