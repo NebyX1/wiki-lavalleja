@@ -1,0 +1,54 @@
+WikiLavalleja Backend
+====================
+
+Local development quick start (from the backend/ directory):
+
+1. Activate virtual environment:
+   Windows:  venv\Scripts\Activate.ps1
+   Linux:    source venv/bin/activate
+
+2. Install dependencies:
+   python -m pip install -r requirements.txt
+
+3. Copy environment config and edit values:
+   Windows:  copy .env.example .env
+   Linux:    cp .env.example .env
+   Required vars: SECRET_KEY, DATABASE_URL, MAIL_*, MINIO_*
+
+4. Apply database migrations (creates users, 2FA, audit, and wiki tables):
+   python -m flask db upgrade
+
+5. Create the first admin user:
+   python -m flask create-admin <username> <email> <password> <true|false>
+   (true = super admin, false = regular admin)
+
+6. (Optional) Initialize MinIO bucket:
+   python -m flask init-bucket
+
+7. (Optional) Import legacy data from ../data/db.json:
+   python -m flask import-wiki-data ../data/db.json --publish
+   (omit --publish to keep articles as drafts)
+
+8. Start the app:
+   python wsgi.py
+   or
+   flask run
+
+The backend is available at http://localhost:5000:
+   /admin/login         editorial panel
+   /admin/articles      article list
+   /admin/media         media library
+   /api/v1/articles     public JSON API
+   /health/live         liveness probe
+   /health/ready        readiness probe
+
+Production (Coolify / Docker):
+   The Dockerfile + entrypoint.sh handle everything automatically.
+   Set environment variables in Coolify, expose port 5000, deploy.
+   entrypoint.sh runs "flask db upgrade" then starts Gunicorn.
+   If migration fails, container will NOT start (error visible in logs).
+
+After first deploy, exec into the container and run:
+   flask create-admin <username> <email> <password> true
+   flask init-bucket
+   flask import-wiki-data /app/data/db.json --publish

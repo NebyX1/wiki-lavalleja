@@ -7,24 +7,22 @@ interface ArticleInfoboxProps {
 export default function ArticleInfobox({ article }: ArticleInfoboxProps) {
   return (
     <div className="wiki-infobox">
-      <figure className="border-b wl-border">
-        <img
-          src={article.heroImage}
-          alt={article.imageAlt}
-          className="w-full object-cover max-h-56"
-        />
-      </figure>
+      {article.heroImage && (
+        <figure className="border-b wl-border">
+          <img src={article.heroImage} alt={article.imageAlt || ""} className="w-full object-cover max-h-56" />
+        </figure>
+      )}
       <div className="p-0">
         <h2 className="wiki-page-title text-base px-3 pt-3 pb-2">{article.title}</h2>
         <dl>
           <dt>Tipo</dt>
-          <dd>{article.type}</dd>
+          <dd>{article.type || "—"}</dd>
 
           <dt>Período</dt>
-          <dd>{article.period}</dd>
+          <dd>{article.period || "—"}</dd>
 
           <dt>Nacimiento</dt>
-          <dd>{article.birthPlace}</dd>
+          <dd>{article.birthPlace || "—"}</dd>
 
           {article.deathPlace && (
             <>
@@ -34,10 +32,10 @@ export default function ArticleInfobox({ article }: ArticleInfoboxProps) {
           )}
 
           <dt>Calle</dt>
-          <dd>{article.streetName}</dd>
+          <dd>{article.streetName || "—"}</dd>
 
           <dt>Categoría</dt>
-          <dd>{article.category}</dd>
+          <dd>{article.category?.name || "—"}</dd>
 
           {article.coordinates && (
             <>
@@ -59,26 +57,22 @@ export default function ArticleInfobox({ article }: ArticleInfoboxProps) {
             <dt className="text-xs font-semibold wl-muted uppercase tracking-wider mb-1.5">Etiquetas</dt>
             <div className="flex flex-wrap gap-1">
               {article.tags.map((tag) => (
-                <span key={tag} className="badge badge-outline badge-xs">
-                  {tag}
-                </span>
+                <span key={tag.id} className="badge badge-outline badge-xs">{tag.name}</span>
               ))}
             </div>
           </div>
         )}
 
-        {article.sources && article.sources.length > 0 && (
+        {article.sources.length > 0 && (
           <div className="px-3 pb-2">
-            <dt className="text-xs font-semibold wl-muted uppercase tracking-wider mb-1">
-              Fuentes
-            </dt>
+            <dt className="text-xs font-semibold wl-muted uppercase tracking-wider mb-1">Fuentes</dt>
             <dd className="text-xs wl-muted">{article.sources.length} referencias</dd>
           </div>
         )}
 
-        <p className="text-[10px] wl-muted px-3 pb-3 leading-relaxed">
-          Crédito imagen: {article.imageCredit}
-        </p>
+        {article.imageCredit && (
+          <p className="text-[10px] wl-muted px-3 pb-3 leading-relaxed">Crédito: {article.imageCredit}</p>
+        )}
       </div>
     </div>
   );

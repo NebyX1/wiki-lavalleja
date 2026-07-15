@@ -1,0 +1,452 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ 'Editar artículo' if article else 'Nuevo artículo' }} - Admin Panel{% endblock %}
+
+{% block extra_head %}
+<meta name="csrf-token" content="{{ csrf_token() }}">
+{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{{ url_for('admin.article_list') }}" class="text-sm text-slate-500 hover:text-blue-600">&larr; Volver a artículos</a>
+</div>
+
+<div id="article-editor" data-article-id="{{ article.id if article else '' }}">
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-2xl font-bold text-slate-900">{{ 'Editar artículo' if article else 'Nuevo artículo' }}</h1>
+        <div class="flex items-center gap-2">
+            <span id="save-status" class="text-sm text-slate-400"></span>
+            <button id="btn-save-draft" class="px-4 py-2 text-sm font-semibold text-slate-700 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors">Guardar borrador</button>
+            {% if current_user.is_superuser %}
+            <button id="btn-publish" class="px-4 py-2 text-sm font-semibold text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors">Publicar</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Identity -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h2 class="text-lg font-bold mb-4 text-slate-900">Identidad</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Título</label>
+                        <input id="f-title" type="text" value="{{ article.title if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Slug</label>
+                        <input id="f-slug" type="text" value="{{ article.slug if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Subtítulo</label>
+                        <input id="f-subtitle" type="text" value="{{ article.subtitle if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Tipo</label>
+                        <input id="f-type" type="text" value="{{ article.type if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Categoría</label>
+                        <select id="f-category" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg">
+                            <option value="">—</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1Etiquetas</label>
+                        <input id="f-tags" type="text" value="{{ article.tags|join(', ') if article else '' }}" placeholder="etiqueta1, etiqueta2" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Resumen</label>
+                        <textarea id="f-summary" rows="3" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg">{{ article.summary if article else '' }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h2 class="text-lg font-bold mb-4 text-slate-900">Contenido</h2>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Contexto histórico</label>
+                    <textarea id="f-historical-context" rows="3" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg">{{ article.historical_context if article else '' }}</textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Cuerpo (Markdown)</label>
+                    <textarea id="f-body" rows="15" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg font-mono">{{ article.body_markdown if article else '' }}</textarea>
+                    <p class="text-xs text-slate-400 mt-1">Usa <code>media://UUID</code> para insertar imágenes de la biblioteca.</p>
+                </div>
+            </div>
+
+            <!-- Key facts -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Hechos destacados</h2>
+                    <button onclick="addKeyFact()" class="text-sm text-blue-600 hover:underline">+ Añadir</button>
+                </div>
+                <div id="key-facts" class="space-y-2"></div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Cronología</h2>
+                    <button onclick="addTimeline()" class="text-sm text-blue-600 hover:underline">+ Añadir</button>
+                </div>
+                <div id="timeline-events" class="space-y-2"></div>
+            </div>
+
+            <!-- Related places -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Lugares relacionados</h2>
+                    <button onclick="addPlace()" class="text-sm text-blue-600 hover:underline">+ Añadir</button>
+                </div>
+                <div id="related-places" class="space-y-2"></div>
+            </div>
+
+            <!-- Sources -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900">Fuentes</h2>
+                    <button onclick="addSource()" class="text-sm text-blue-600 hover:underline">+ Añadir</button>
+                </div>
+                <div id="sources" class="space-y-2"></div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="space-y-6">
+            <!-- Encyclopedia data -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h2 class="text-lg font-bold mb-4 text-slate-900">Ficha enciclopédica</h2>
+                <div class="space-y-3">
+                    <div><label class="text-sm text-slate-600">Nombre de calle</label><input id="f-street-name" type="text" value="{{ article.street_name if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1"></div>
+                    <div><label class="text-sm text-slate-600">Período</label><input id="f-period" type="text" value="{{ article.period if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1"></div>
+                    <div><label class="text-sm text-slate-600">Lugar de nacimiento</label><input id="f-birth-place" type="text" value="{{ article.birth_place if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1"></div>
+                    <div><label class="text-sm text-slate-600">Lugar de fallecimiento</label><input id="f-death-place" type="text" value="{{ article.death_place if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1"></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><label class="text-sm text-slate-600">Latitud</label><input id="f-latitude" type="number" step="any" value="{{ article.latitude if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1"></div>
+                        <div><label class="text-sm text-slate-600">Longitud</label><input id="f-longitude" type="number" step="any" value="{{ article.longitude if article else '' }}" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1"></div>
+                    </div>
+                    <div><label class="text-sm text-slate-600">Confianza de coordenadas</label>
+                        <select id="f-coordinate-confidence" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1">
+                            <option value="alta" {{ 'selected' if article and article.coordinate_confidence == 'alta' }}>Alta</option>
+                            <option value="media" {{ 'selected' if article and article.coordinate_confidence == 'media' }}>Media</option>
+                            <option value="baja" {{ 'selected' if article and article.coordinate_confidence == 'baja' }}>Baja</option>
+                        </select></div>
+                    <div><label class="text-sm text-slate-600">Evidencia de calle</label>
+                        <select id="f-street-evidence-status" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg mt-1">
+                            <option value="confirmada" {{ 'selected' if article and article.street_evidence_status == 'confirmada' }}>Confirmada</option>
+                            <option value="probable" {{ 'selected' if article and article.street_evidence_status == 'probable' }}>Probable</option>
+                            <option value="a verificar" {{ 'selected' if article and article.street_evidence_status == 'a verificar' }}>A verificar</option>
+                        </select></div>
+                </div>
+            </div>
+
+            <!-- Hero image -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h2 class="text-lg font-bold mb-4 text-slate-900">Imagen principal</h2>
+                <div id="hero-image-preview" class="mb-3">
+                    {% if article and article.hero_media %}
+                    <img src="/api/v1/media/{{ article.hero_media.uuid }}/content/large" alt="{{ article.image_alt or '' }}" class="w-full rounded-lg mb-2">
+                    {% endif %}
+                </div>
+                <button onclick="openMediaPicker()" class="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">Abrir biblioteca</button>
+                <div class="mt-3 space-y-2">
+                    <div><label class="text-xs text-slate-500">Texto alternativo</label><input id="f-image-alt" type="text" value="{{ article.image_alt if article else '' }}" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg"></div>
+                    <div><label class="text-xs text-slate-500">Crédito</label><input id="f-image-credit" type="text" value="{{ article.image_credit if article else '' }}" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg"></div>
+                </div>
+            </div>
+
+            <!-- Publication -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <h2 class="text-lg font-bold mb-4 text-slate-900">Publicación</h2>
+                <div class="space-y-3">
+                    <label class="flex items-center text-sm">
+                        <input id="f-featured" type="checkbox" {{ 'checked' if article and article.featured else '' }} class="mr-2"> Destacado
+                    </label>
+                    <div><label class="text-xs text-slate-500">Título SEO</label><input id="f-seo-title" type="text" value="{{ article.seo_title if article else '' }}" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg mt-1"></div>
+                    <div><label class="text-xs text-slate-500">Descripción SEO</label><textarea id="f-seo-description" rows="2" class="w-full px-3 py-2 text-xs border border-slate-300 rounded-lg mt-1">{{ article.seo_description if article else '' }}</textarea></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if article %}
+<script>
+window.ARTICLE_DATA = {{ article_json|safe if article_json else 'null' }};
+</script>
+{% endif %}
+
+{% block extra_scripts %}
+<script>
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+const articleId = document.getElementById('article-editor').dataset.articleId;
+
+// Load categories
+async function loadCategories() {
+    const res = await fetch('/api/v1/admin/categories', { headers: { 'X-CSRFToken': csrfToken || '' } });
+    if (!res.ok) return;
+    const cats = await res.json();
+    const sel = document.getElementById('f-category');
+    cats.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = c.name;
+        if (window.ARTICLE_DATA && window.ARTICLE_DATA.category && c.id === window.ARTICLE_DATA.category.id) opt.selected = true;
+        sel.appendChild(opt);
+    });
+    {% if article and article.category_id %}
+    sel.value = {{ article.category_id }};
+    {% endif %}
+}
+
+// Load existing article data
+{% if article %}
+const articleData = {
+    title: {{ article.title|tojson }},
+    slug: {{ article.slug|tojson }},
+    subtitle: {{ (article.subtitle or '')|tojson }},
+    type: {{ (article.type or '')|tojson }},
+    street_name: {{ (article.street_name or '')|tojson }},
+    period: {{ (article.period or '')|tojson }},
+    birth_place: {{ (article.birth_place or '')|tojson }},
+    death_place: {{ (article.death_place or '')|tojson }},
+    summary: {{ (article.summary or '')|tojson }},
+    historical_context: {{ (article.historical_context or '')|tojson }},
+    body_markdown: {{ (article.body_markdown or '')|tojson }},
+    image_alt: {{ (article.image_alt or '')|tojson }},
+    image_credit: {{ (article.image_credit or '')|tojson }},
+    latitude: {{ article.latitude|tojson }},
+    longitude: {{ article.longitude|tojson }},
+    featured: {{ article.featured|tojson }},
+    version: {{ article.version|tojson }},
+    key_facts: {{ article.key_facts|map(attribute='text')|list|tojson }},
+    timeline: [
+        {% for e in article.timeline_events %}
+        {year: {{ e.year|tojson }}, event: {{ e.event|tojson }}},
+        {% endfor %}
+    ],
+    related_places: [
+        {% for p in article.related_places %}
+        {name: {{ p.name|tojson }}, description: {{ (p.description or '')|tojson }}, type: {{ (p.type or '')|tojson }}},
+        {% endfor %}
+    ],
+    sources: [
+        {% for s in article.sources %}
+        {label: {{ s.label|tojson }}, url: {{ s.url|tojson }}, kind: {{ s.kind|tojson }}},
+        {% endfor %}
+    ],
+};
+{% else %}
+const articleData = { version: 1 };
+{% endif %}
+
+// Populate form
+function populateForm() {
+    Object.entries(articleData).forEach(([key, val]) => {
+        const fieldMap = {
+            street_name: 'f-street-name', period: 'f-period', birth_place: 'f-birth-place',
+            death_place: 'f-death-place', summary: 'f-summary', historical_context: 'f-historical-context',
+            body_markdown: 'f-body', image_alt: 'f-image-alt', image_credit: 'f-image-credit',
+        };
+        const elementId = fieldMap[key] || `f-${key.replace(/_/g, '-')}`;
+        const el = document.getElementById(elementId);
+        if (el && val != null) {
+            el.value = typeof val === 'boolean' ? val : val;
+        }
+    });
+
+    if (articleData.key_facts) articleData.key_facts.forEach(f => addKeyFact(f));
+    if (articleData.timeline) articleData.timeline.forEach(e => addTimeline(e));
+    if (articleData.related_places) articleData.related_places.forEach(p => addPlace(p));
+    if (articleData.sources) articleData.sources.forEach(s => addSource(s));
+}
+
+// Key facts
+function addKeyFact(text = '') {
+    const container = document.getElementById('key-facts');
+    const div = document.createElement('div');
+    div.className = 'flex gap-2';
+    div.innerHTML = `<input type="text" class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Hecho destacado" value="${text}"><button onclick="this.parentElement.remove()" class="px-2 text-red-500">&times;</button>`;
+    container.appendChild(div);
+}
+
+// Timeline
+function addTimeline(event = {}) {
+    const container = document.getElementById('timeline-events');
+    const div = document.createElement('div');
+    div.className = 'flex gap-2';
+    div.innerHTML = `<input type="text" class="w-24 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Año" value="${event.year || ''}"><input type="text" class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Evento" value="${event.event || ''}"><button onclick="this.parentElement.remove()" class="px-2 text-red-500">&times;</button>`;
+    container.appendChild(div);
+}
+
+// Related places
+function addPlace(place = {}) {
+    const container = document.getElementById('related-places');
+    const div = document.createElement('div');
+    div.className = 'flex gap-2';
+    div.innerHTML = `<input type="text" class="w-32 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Nombre" value="${place.name || ''}"><input type="text" class="w-24 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Tipo" value="${place.type || ''}"><input type="text" class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Descripción" value="${place.description || ''}"><button onclick="this.parentElement.remove()" class="px-2 text-red-500">&times;</button>`;
+    container.appendChild(div);
+}
+
+// Sources
+function addSource(source = {}) {
+    const container = document.getElementById('sources');
+    const div = document.createElement('div');
+    div.className = 'flex gap-2';
+    div.innerHTML = `<input type="text" class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="Etiqueta" value="${source.label || ''}"><input type="text" class="flex-1 px-3 py-2 text-sm border border-slate-300 rounded-lg" placeholder="URL" value="${source.url || ''}"><select class="px-2 py-2 text-sm border border-slate-300 rounded-lg"><option value="oficial" ${source.kind==='oficial'?'selected':''}>Oficial</option><option value="institucional" ${source.kind==='institucional'?'selected':''}>Institucional</option><option value="biblioteca" ${source.kind==='biblioteca'?'selected':''}>Biblioteca</option><option value="mapa" ${source.kind==='mapa'?'selected':''}>Mapa</option><option value="referencia" ${source.kind==='referencia'?'selected':''}>Referencia</option><option value="imagen" ${source.kind==='imagen'?'selected':''}>Imagen</option></select><button onclick="this.parentElement.remove()" class="px-2 text-red-500">&times;</button>`;
+    container.appendChild(div);
+}
+
+// Media picker (basic modal)
+function openMediaPicker() {
+    window.open('/admin/media?picker=1', '_blank', 'width=800,height=600');
+}
+
+window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'media-selected') {
+        // Store UUID for hero image
+        window._selectedMediaId = e.data.mediaId;
+        window._selectedMediaUuid = e.data.mediaUuid;
+        const preview = document.getElementById('hero-image-preview');
+        preview.innerHTML = `<img src="/api/v1/media/${e.data.mediaUuid}/content/large" class="w-full rounded-lg mb-2">`;
+    }
+});
+
+// Collect form data
+function collectData() {
+    const tagsInput = document.getElementById('f-tags').value;
+    const tags = tagsInput ? tagsInput.split(',').map(t => ({ name: t.trim() })).filter(t => t.name) : [];
+
+    const keyFacts = Array.from(document.querySelectorAll('#key-facts input')).map(i => ({ text: i.value })).filter(f => f.text);
+    const timeline = Array.from(document.querySelectorAll('#timeline-events > div')).map(d => {
+        const inputs = d.querySelectorAll('input');
+        return { year: inputs[0].value, event: inputs[1].value };
+    }).filter(e => e.year || e.event);
+    const relatedPlaces = Array.from(document.querySelectorAll('#related-places > div')).map(d => {
+        const inputs = d.querySelectorAll('input');
+        return { name: inputs[0].value, type: inputs[1].value, description: inputs[2].value };
+    }).filter(p => p.name);
+    const sources = Array.from(document.querySelectorAll('#sources > div')).map(d => {
+        const inputs = d.querySelectorAll('input');
+        const select = d.querySelector('select');
+        return { label: inputs[0].value, url: inputs[1].value, kind: select.value };
+    }).filter(s => s.label && s.url);
+
+    return {
+        title: document.getElementById('f-title').value,
+        slug: document.getElementById('f-slug').value,
+        subtitle: document.getElementById('f-subtitle').value,
+        type: document.getElementById('f-type').value,
+        categoryId: document.getElementById('f-category').value ? parseInt(document.getElementById('f-category').value) : null,
+        tags,
+        summary: document.getElementById('f-summary').value,
+        streetName: document.getElementById('f-street-name').value,
+        period: document.getElementById('f-period').value,
+        birthPlace: document.getElementById('f-birth-place').value,
+        deathPlace: document.getElementById('f-death-place').value,
+        latitude: document.getElementById('f-latitude').value ? parseFloat(document.getElementById('f-latitude').value) : null,
+        longitude: document.getElementById('f-longitude').value ? parseFloat(document.getElementById('f-longitude').value) : null,
+        coordinateConfidence: document.getElementById('f-coordinate-confidence').value,
+        coordinateNote: '',
+        streetEvidenceStatus: document.getElementById('f-street-evidence-status').value,
+        streetEvidenceNote: '',
+        historicalContext: document.getElementById('f-historical-context').value,
+        bodyMarkdown: document.getElementById('f-body').value,
+        imageAlt: document.getElementById('f-image-alt').value,
+        imageCredit: document.getElementById('f-image-credit').value,
+        heroMediaId: window._selectedMediaId || null,
+        featured: document.getElementById('f-featured').checked,
+        seoTitle: document.getElementById('f-seo-title').value,
+        seoDescription: document.getElementById('f-seo-description').value,
+        version: articleData.version || 1,
+        keyFacts,
+        timeline,
+        relatedPlaces,
+        sources,
+        status: 'draft',
+    };
+}
+
+// Save
+async function save(method) {
+    const status = document.getElementById('save-status');
+    status.textContent = 'Guardando...';
+    status.className = 'text-sm text-amber-500';
+
+    const data = collectData();
+
+    if (method === 'publish') {
+        data.status = 'published';
+    }
+
+    const url = articleId ? `/api/v1/admin/articles/${articleId}` : '/api/v1/admin/articles';
+    const httpMethod = articleId ? 'PATCH' : 'POST';
+
+    try {
+        const res = await fetch(url, {
+            method: httpMethod,
+            headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrfToken || '' },
+            body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+            const result = await res.json();
+            status.textContent = 'Guardado';
+            status.className = 'text-sm text-emerald-500';
+            articleData.version = result.version || articleData.version + 1;
+
+            if (!articleId && result.id) {
+                window.location.href = `/admin/articles/${result.id}/edit`;
+            } else if (method === 'publish') {
+                status.textContent = 'Publicado';
+                window.location.reload();
+            }
+        } else if (res.status === 409) {
+            status.textContent = 'Conflicto de versión. Recargá la página.';
+            status.className = 'text-sm text-red-500';
+        } else {
+            const err = await res.json();
+            status.textContent = err.error?.message || 'Error al guardar';
+            status.className = 'text-sm text-red-500';
+        }
+    } catch (e) {
+        status.textContent = 'Error de conexión';
+        status.className = 'text-sm text-red-500';
+    }
+}
+
+document.getElementById('btn-save-draft').addEventListener('click', () => save('draft'));
+document.getElementById('btn-publish').addEventListener('click', () => save('publish'));
+
+// Autosave
+let autosaveTimer;
+document.addEventListener('input', () => {
+    clearTimeout(autosaveTimer);
+    if (articleId) {
+        autosaveTimer = setTimeout(async () => {
+            const data = collectData();
+            const res = await fetch(`/api/v1/admin/articles/${articleId}/autosave`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrfToken || '' },
+                body: JSON.stringify(data),
+            });
+            if (res.ok) {
+                const result = await res.json();
+                articleData.version = result.version || articleData.version;
+                const status = document.getElementById('save-status');
+                status.textContent = '✓';
+                status.className = 'text-sm text-slate-400';
+                setTimeout(() => { status.textContent = ''; }, 2000);
+            }
+        }, 5000);
+    }
+});
+
+// Load
+loadCategories();
+populateForm();
+</script>
+{% endblock %}
+{% endblock %}

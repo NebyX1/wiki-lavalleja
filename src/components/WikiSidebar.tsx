@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getCategories } from "../lib/api";
 
 interface WikiSidebarProps {
   className?: string;
 }
 
-const categories = [
-  { label: "Personajes históricos", filter: "Independencia" },
-  { label: "Literatura minuana", filter: "Literatura" },
-  { label: "Fundación de Minas", filter: "Fundación de Minas" },
-  { label: "Calles con memoria", hash: "#calles" },
-  { label: "Lugares y monumentos", hash: "#lugares" },
-  { label: "Mujeres de Lavalleja", filter: "Literatura y educación" },
-];
-
 export default function WikiSidebar({ className = "" }: WikiSidebarProps) {
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
+
   return (
     <aside className={`wiki-sidebar ${className}`}>
       <nav className="space-y-1" aria-label="Navegación principal">
@@ -37,12 +35,12 @@ export default function WikiSidebar({ className = "" }: WikiSidebarProps) {
         </p>
         {categories.map((cat) => (
           <Link
-            key={cat.label}
-            to={cat.filter ? `/?cat=${encodeURIComponent(cat.filter)}` : cat.hash ? `/${cat.hash}` : "/"}
+            key={cat.id}
+            to={`/?cat=${encodeURIComponent(cat.name)}`}
             className="wiki-sidebar-link text-sm"
           >
             <span className="w-1.5 h-1.5 rounded-full wl-accent shrink-0" style={{ opacity: 0.5 }} />
-            {cat.label}
+            {cat.name}
           </Link>
         ))}
       </nav>

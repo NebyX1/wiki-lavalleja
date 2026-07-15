@@ -1,0 +1,93 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="mb-10">
+    <div class="flex items-center space-x-4 mb-2">
+        <div class="p-2 bg-blue-100 rounded-lg">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        </div>
+        <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Escritorio</h1>
+    </div>
+    <p class="text-slate-500 font-medium text-lg">Panel editorial de WikiLavalleja.</p>
+</div>
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+    <div class="p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
+        <p class="text-slate-500 text-xs uppercase tracking-wider font-bold mb-2">Total artículos</p>
+        <p class="text-3xl font-black text-slate-900">{{ stats.total_articles }}</p>
+    </div>
+    <div class="p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
+        <p class="text-emerald-500 text-xs uppercase tracking-wider font-bold mb-2">Publicados</p>
+        <p class="text-3xl font-black text-emerald-600">{{ stats.published }}</p>
+    </div>
+    <div class="p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
+        <p class="text-slate-500 text-xs uppercase tracking-wider font-bold mb-2">Borradores</p>
+        <p class="text-3xl font-black text-slate-600">{{ stats.drafts }}</p>
+    </div>
+    <div class="p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
+        <p class="text-amber-500 text-xs uppercase tracking-wider font-bold mb-2">En revisión</p>
+        <p class="text-3xl font-black text-amber-600">{{ stats.review }}</p>
+    </div>
+    <div class="p-5 bg-white border border-slate-100 rounded-2xl shadow-sm">
+        <p class="text-rose-500 text-xs uppercase tracking-wider font-bold mb-2">Archivados</p>
+        <p class="text-3xl font-black text-rose-600">{{ stats.archived }}</p>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <div class="bg-white p-6 border border-slate-100 rounded-2xl shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-900">Artículos recientes</h3>
+            <a href="{{ url_for('admin.article_list') }}" class="text-sm text-blue-600 hover:underline">Ver todos</a>
+        </div>
+        <div class="space-y-2">
+            {% for article in recent_articles %}
+            <a href="{{ url_for('admin.article_edit', article_id=article.id) }}" class="flex items-center justify-between p-3 hover:bg-slate-50 rounded-lg transition-colors">
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-slate-900 truncate">{{ article.title }}</p>
+                    <p class="text-xs text-slate-400">Actualizado: {{ article.updated_at|date_es if article.updated_at else '—' }}</p>
+                </div>
+                <span class="ml-2 px-2 py-1 text-xs rounded-full {% if article.status == 'published' %}bg-emerald-100 text-emerald-700{% elif article.status == 'draft' %}bg-slate-100 text-slate-600{% else %}bg-amber-100 text-amber-700{% endif %}">{{ article.status }}</span>
+            </a>
+            {% else %}
+            <p class="text-sm text-slate-400 text-center py-4">No hay artículos.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="bg-white p-6 border border-slate-100 rounded-2xl shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="font-bold text-slate-900">Actividad reciente</h3>
+            {% if current_user.is_superuser %}
+            <a href="{{ url_for('admin.view_logs') }}" class="text-sm text-blue-600 hover:underline">Ver audit</a>
+            {% endif %}
+        </div>
+        <div class="space-y-2">
+            {% for log in recent_logs %}
+            <div class="flex items-center gap-3 p-2 text-sm">
+                <span class="px-2 py-1 text-xs font-mono rounded {% if 'CREATE' in log.action or 'PUBLISH' in log.action %}bg-emerald-50 text-emerald-600{% elif 'DELETE' in log.action or 'UNAUTHORIZED' in log.action %}bg-rose-50 text-rose-600{% else %}bg-slate-50 text-slate-500{% endif %}">{{ log.action }}</span>
+                <span class="text-slate-600 flex-1 truncate">{{ log.details or '' }}</span>
+                <span class="text-xs text-slate-400 whitespace-nowrap">{{ log.created_at|date_es if log.created_at else '' }}</span>
+            </div>
+            {% else %}
+            <p class="text-sm text-slate-400 text-center py-4">Sin actividad reciente.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="bg-white p-6 border border-slate-100 rounded-2xl shadow-sm">
+    <h3 class="font-bold text-slate-900 mb-4">Biblioteca multimedia</h3>
+    <div class="flex items-center gap-8">
+        <div>
+            <p class="text-3xl font-black text-slate-900">{{ stats.total_media }}</p>
+            <p class="text-sm text-slate-500">Imágenes</p>
+        </div>
+        <div>
+            <p class="text-3xl font-black text-slate-900">{{ (stats.total_media_bytes / 1048576)|round(1) if stats.total_media_bytes else 0 }}</p>
+            <p class="text-sm text-slate-500">MB utilizados</p>
+        </div>
+        <a href="{{ url_for('admin.media_library') }}" class="ml-auto inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">Ir a biblioteca</a>
+    </div>
+</div>
+{% endblock %}

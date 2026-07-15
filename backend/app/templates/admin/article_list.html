@@ -1,0 +1,103 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Artículos - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold text-slate-900">Artículos</h1>
+    <a href="{{ url_for('admin.article_create') }}" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Nuevo artículo
+    </a>
+</div>
+
+<form method="GET" class="flex flex-wrap gap-3 mb-6">
+    <input type="text" name="q" value="{{ q }}" placeholder="Buscar..." class="flex-1 min-w-[200px] px-4 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    <select name="status" class="px-4 py-2 text-sm border border-slate-300 rounded-lg">
+        <option value="">Todos los estados</option>
+        <option value="draft" {{ 'selected' if status_filter == 'draft' }}>Borrador</option>
+        <option value="review" {{ 'selected' if status_filter == 'review' }}>En revisión</option>
+        <option value="published" {{ 'selected' if status_filter == 'published' }}>Publicado</option>
+        <option value="archived" {{ 'selected' if status_filter == 'archived' }}>Archivado</option>
+    </select>
+    <button type="submit" class="px-4 py-2 text-sm font-semibold text-white bg-slate-700 rounded-lg hover:bg-slate-800">Filtrar</button>
+</form>
+
+<div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-slate-200">
+    <table class="w-full text-sm text-left">
+        <thead class="text-xs text-slate-600 uppercase bg-slate-50 border-b border-slate-200">
+            <tr>
+                <th class="px-6 py-3">Título</th>
+                <th class="px-6 py-3">Categoría</th>
+                <th class="px-6 py-3">Estado</th>
+                <th class="px-6 py-3">Actualizado</th>
+                <th class="px-6 py-3">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in pagination.items %}
+            <tr class="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                <td class="max-w-xs px-6 py-4 truncate">
+                    <a href="{{ url_for('admin.article_edit', article_id=article.id) }}" class="font-medium text-slate-900 hover:text-blue-600">
+                        {{ article.title }}
+                    </a>
+                    {% if article.featured %}
+                    <span class="ml-2 text-xs text-amber-600">★</span>
+                    {% endif %}
+                </td>
+                <td class="px-6 py-4 text-slate-600">{{ article.category.name if article.category else '—' }}</td>
+                <td class="px-6 py-4">
+                    {% set status_class = {
+                        'draft': 'bg-slate-100 text-slate-700',
+                        'review': 'bg-amber-100 text-amber-700',
+                        'published': 'bg-emerald-100 text-emerald-700',
+                        'archived': 'bg-rose-100 text-rose-700'
+                    } %}
+                    <span class="px-2 py-1 text-xs font-medium rounded-full {{ status_class[article.status] if article.status in status_class else 'bg-slate-100 text-slate-600' }}">
+                        {{ article.status }}
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-slate-500 text-xs">{{ article.updated_at|date_es if article.updated_at else '—' }}</td>
+                <td class="px-6 py-4 space-x-2">
+                    <a href="{{ url_for('admin.article_edit', article_id=article.id) }}" class="text-blue-600 hover:underline text-xs font-medium">Editar</a>
+                    <a href="{{ url_for('admin.article_revisions', article_id=article.id) }}" class="text-slate-600 hover:underline text-xs">Revisiones</a>
+                    {% if current_user.is_superuser %}
+                    <button onclick="duplicateArticle({{ article.id }})" class="text-slate-600 hover:underline text-xs">Duplicar</button>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="px-6 py-12 text-center text-slate-400">No hay artículos.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% if pagination.pages > 1 %}
+<nav class="flex items-center justify-center gap-2 mt-6">
+    {% if pagination.has_prev %}
+    <a href="{{ url_for('admin.article_list', page=pagination.prev_num, q=q, status=status_filter) }}" class="px-3 py-1 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">Anterior</a>
+    {% endif %}
+    <span class="text-sm text-slate-600">Página {{ pagination.page }} de {{ pagination.pages }}</span>
+    {% if pagination.has_next %}
+    <a href="{{ url_for('admin.article_list', page=pagination.next_num, q=q, status=status_filter) }}" class="px-3 py-1 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">Siguiente</a>
+    {% endif %}
+</nav>
+{% endif %}
+
+<script>
+async function duplicateArticle(id) {
+    if (!confirm('¿Duplicar este artículo?')) return;
+    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    const res = await fetch(`/api/v1/admin/articles/${id}/duplicate`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': token || '' },
+    });
+    if (res.ok) {
+        window.location.reload();
+    }
+}
+</script>
+{% endblock %}

@@ -27,29 +27,61 @@ export interface Source {
   kind: "oficial" | "institucional" | "biblioteca" | "mapa" | "referencia" | "imagen";
 }
 
+export interface ArticleCategory {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface ArticleTag {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+export interface ArticleSeo {
+  title: string;
+  description: string | null;
+  canonicalUrl: string | null;
+}
+
+export interface HeroMedia {
+  id: number;
+  uuid: string;
+  alt: string;
+  credit: string;
+  caption: string;
+}
+
 export interface Article {
-  id: string;
+  id: number;
   slug: string;
   title: string;
-  subtitle: string;
-  type: string;
-  streetName: string;
-  period: string;
-  birthPlace: string;
-  deathPlace: string;
-  category: string;
-  tags: string[];
-  summary: string;
-  heroImage: string;
-  imageAlt: string;
-  imageCredit: string;
-  coordinates: Coordinates;
-  streetEvidence: StreetEvidence;
-  historicalContext: string;
+  subtitle: string | null;
+  type: string | null;
+  streetName: string | null;
+  period: string | null;
+  birthPlace: string | null;
+  deathPlace: string | null;
+  category: ArticleCategory | null;
+  tags: ArticleTag[];
+  summary: string | null;
+  heroImage: string | null;
+  heroMedia: HeroMedia | null;
+  imageAlt: string | null;
+  imageCredit: string | null;
+  coordinates: Coordinates | null;
+  streetEvidence: StreetEvidence | null;
+  historicalContext: string | null;
   keyFacts: string[];
   timeline: TimelineEvent[];
   relatedPlaces: RelatedPlace[];
   sources: Source[];
-  sourceNotes: string;
-  body: string;
+  sourceNotes: string | null;
+  body: string | null;
+  status: string;
+  featured: boolean;
+  publishedAt: string | null;
+  updatedAt: string | null;
+  seo: ArticleSeo;
 }
